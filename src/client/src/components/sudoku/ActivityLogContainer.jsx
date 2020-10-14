@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ActivityLog from './ActivityLog'
+import Sudoku from './Sudoku'
 
 const LogsNumberPerPage = 5
 
@@ -10,6 +10,6 @@ const mapStateToProps = state => {
     }
 }
 
-const ActivityLogContainer = connect(mapStateToProps)(ActivityLog)
+const ActivityLogContainer = connect(mapStateToProps)(Sudoku)
 
 export default ActivityLogContainer
