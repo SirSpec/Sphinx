@@ -1,5 +1,5 @@
 import React from 'react';
-import ActivityLogContainer from "./components/ActivityLog/ActivityLogContainer";
+import ActivityLogContainer from "./components/sudoku/ActivityLogContainer";
 
 import "./styles/global";
 
