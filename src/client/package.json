@@ -1,0 +1,11 @@
+{
+  "name": "sphinx",
+  "version": "1.0.0",
+  "description": "Client Application of Sphinx project",
+  "main": "index.js",
+  "author": "Spec",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
