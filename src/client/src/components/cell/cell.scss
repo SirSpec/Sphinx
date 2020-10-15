@@ -1,5 +1,11 @@
 .cell {
-    padding: 1px;
+    margin: 0;
+    padding: 0;
+    width: 5vw;
+    height: 5vw;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .input {
