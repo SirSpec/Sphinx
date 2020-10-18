@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 
 import styles from "./cell"
 
-const Cell = (props) => {
+const Cell = ({ value, onValueChange }) => {
     return (
         <div className={styles.cell}>
-            <input className={styles.input} value={props.value} onChange={props.onValueChange} />
+            <input className={styles.input} value={value} onChange={onValueChange} />
         </div>
     );
 };
