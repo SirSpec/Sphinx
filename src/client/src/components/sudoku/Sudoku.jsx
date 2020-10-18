@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 
 import styles from "./sudoku"
 
 import Region from "../region/Region"
+import Cell from "../cell/Cell"
 
-const Sudoku = (props) => {
+const Sudoku = ({ cells }) => {
     return (
         <div className={styles.sudoku}>
-            <Region></Region>
-            <Region></Region>
-            <Region></Region>
-
-            <Region></Region>
-            <Region></Region>
-            <Region></Region>
-
-            <Region></Region>
-            <Region></Region>
-            <Region></Region>
+            {cells.map((row, index) =>
+                <Region key={index}>
+                    {row.map(cell =>
+                        <Cell key={cell.id} value={cell.value} />
+                    )}
+                </Region>
+            )}
         </div>
     );
 };
 
 Sudoku.propTypes = {
+    cells: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired
 };
 
 export default Sudoku;

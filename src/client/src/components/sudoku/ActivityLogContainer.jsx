@@ -5,7 +5,15 @@ const LogsNumberPerPage = 5
 
 const mapStateToProps = state => {
     return {
-        logs: state.logs,
+        cells: [[{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},],
+        [{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},],
+        [{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},],
+        [{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},],
+        [{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},],
+        [{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},],
+        [{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},],
+        [{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},],
+        [{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},{id: 0,value: 0},],],
         pageSize: LogsNumberPerPage
     }
 }
