@@ -1,15 +1,9 @@
 .cell {
-    margin: 0;
-    padding: 0;
-    width: 5vw;
-    height: 5vw;
-    text-align: center;
+    border: 1px solid black;
     display: flex;
-    justify-content: center;
-}
-
-.input {
-    display: block;
-    width: 100%;
-    text-align: center;
+    
+    .input {    
+        width: 100%;
+        text-align: center;
+    }
 }

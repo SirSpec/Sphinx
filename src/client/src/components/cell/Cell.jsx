@@ -3,16 +3,31 @@ import PropTypes from "prop-types";
 
 import styles from "./cell"
 
-const Cell = ({ value, onValueChange }) => {
+const Cell = ({ cell, onValueChange }) => {
+    function onChangeHandler(event) {
+        let value = event.target.value;
+
+        if (value.match("^[1-9]$")) {
+            onValueChange(cell.row, cell.column, value)
+        }
+        else if (value === "") {
+            onValueChange(cell.row, cell.column, 0)
+        }
+    }
+
     return (
-        <div className={styles.cell}>
-            <input className={styles.input} value={value} onChange={onValueChange} />
-        </div>
+        <li className={styles.cell}>
+            <input className={styles.input} value={cell.value != 0 ? cell.value : ""} onChange={onChangeHandler} />
+        </li>
     );
 };
 
 Cell.propTypes = {
-    value: PropTypes.number.isRequired,
+    cell: PropTypes.shape({
+        row: PropTypes.number.isRequired,
+        column: PropTypes.number.isRequired,
+        value: PropTypes.number.isRequired
+    }).isRequired,
     onValueChange: PropTypes.func.isRequired
 };
 
