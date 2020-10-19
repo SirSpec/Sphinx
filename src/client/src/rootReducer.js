@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import logs from "./reducers/logsReducer"
+import sudoku from "./reducers/sudokuReducer"
 
 const rootReducer = combineReducers({
-    logs,
+    sudoku,
 })
 
 export default rootReducer;
