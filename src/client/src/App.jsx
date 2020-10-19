@@ -1,11 +1,11 @@
 import React from 'react';
-import SudokuContainer from "./components/sudoku/SudokuContainer";
+import DashboardContainer from "./components/dashboard/DashboardContainer";
 
 import "./styles/global";
 
 const App = () => {
   return (
-    <SudokuContainer />
+    <DashboardContainer />
   );
 };
 
