@@ -31,6 +31,7 @@
     "webpack-dev-middleware": "^3.7.2"
   },
   "dependencies": {
+    "@microsoft/signalr": "^3.1.9",
     "express": "^4.17.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
