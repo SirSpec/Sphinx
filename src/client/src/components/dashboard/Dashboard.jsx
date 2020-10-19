@@ -41,7 +41,11 @@ const Dashboard = ({ sudoku, setSudoku, changeCell }) => {
                 <Button type={Button.types.PRIMARY} onClick={sendSudoku}>Send</Button>
             </div>
         )
-        : <Loader />;
+        : (
+            <div className={styles.dashboard}>
+                <Loader />
+            </div>
+        );
 };
 
 Dashboard.propTypes = {

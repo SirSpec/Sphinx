@@ -1,2 +1,5 @@
 .dashboard {
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-content: center;
 }
