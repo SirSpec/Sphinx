@@ -4,6 +4,8 @@ import * as signalR from "@microsoft/signalr"
 
 import styles from "./dashboard"
 
+import Configuration from "../../constants/Configuration"
+
 import Sudoku from "../sudoku/Sudoku"
 import Button from "../button/Button"
 import Loader from "../loader/Loader"
@@ -12,32 +14,30 @@ const Dashboard = ({ sudoku, setSudoku, changeCell }) => {
     const [connection, setConnection] = useState(null);
 
     useEffect(() => {
-        var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/hub").build()
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl(Configuration.BackendHubUrl)
+            .build()
 
-        connection.on("ReceiveMap", sudoku => {
-            setSudoku(sudoku);
-        })
+        connection.on("ReceiveSudoku", sudoku => setSudoku(sudoku))
 
-        connection.start().then(() => {
-            console.log("Map component connection started Dashboard.")
-            connection.invoke("SendMap").catch(err => {
-                console.log(err.toString());
-            });
-        }).catch(err => {
-            console.log(err)
-        });
+        connection
+            .start()
+            .then(() => console.log("Sudoku component connection started."))
+            .catch(error => console.log(error))
 
-        setConnection(connection);
+        setConnection(connection)
     }, []);
 
     function sendSudoku() {
-        console.log(sudoku)
+        connection
+            .invoke("Solve", sudoku)
+            .catch(err => console.log(err.toString()));
     }
 
-    return sudoku.cells
+    return Array.isArray(sudoku)
         ? (
             <div className={styles.dashboard}>
-                <Sudoku cells={sudoku.cells} changeCell={changeCell} />
+                <Sudoku cells={sudoku} changeCell={changeCell} />
                 <Button type={Button.types.PRIMARY} onClick={sendSudoku}>Send</Button>
             </div>
         )
@@ -51,7 +51,7 @@ const Dashboard = ({ sudoku, setSudoku, changeCell }) => {
 Dashboard.propTypes = {
     setSudoku: PropTypes.func.isRequired,
     changeCell: PropTypes.func.isRequired,
-    sudoku: PropTypes.shape(PropTypes.arrayOf(PropTypes.array.isRequired).isRequired).isRequired,
+    sudoku: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
 };
 
 export default Dashboard;
