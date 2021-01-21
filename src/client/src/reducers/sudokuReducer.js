@@ -1,15 +1,20 @@
 import SudokuActions from '../actions/sudokuActions';
 
-function sudoku(state = {}, action) {
+var emptySudoku = [...Array(9)].map(x => Array(9).fill(0));
+
+function sudoku(state = emptySudoku, action) {
     switch (action.type) {
         case SudokuActions.SET_SUDOKU:
             return action.sudoku;
         case SudokuActions.CHANGE_CELL:
-            var newState = {
-                ...state   
-            };
+            var newState = [
+                ...state
+            ];
 
-            newState.cells[action.row][action.column] = isNaN(parseInt(action.value)) ? 0 : parseInt(action.value);
+            newState[action.row][action.column] = isNaN(parseInt(action.value))
+                ? 0
+                : parseInt(action.value);
+
             return newState;
         default:
             return state;
