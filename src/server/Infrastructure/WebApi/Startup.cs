@@ -1,24 +1,35 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Sphinx.Infrastructure.WebApi.Hubs;
+using Microsoft.Extensions.Options;
+using Sphinx.Infrastructure.WebApi.Configurations;
 
 namespace Sphinx.Infrastructure.WebApi
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        private readonly IConfiguration configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<SudokuSolverHubOptions>(
+                configuration.GetSection(SudokuSolverHubOptions.SudokuSolverHub));
+
             services.AddCors();
             services.AddSignalR();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
+            IOptions<SudokuSolverHubOptions> sudokuSolverHubOptions)
         {
             if (env.IsDevelopment())
             {
@@ -26,7 +37,7 @@ namespace Sphinx.Infrastructure.WebApi
             }
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:3000")
+                builder.WithOrigins(sudokuSolverHubOptions.Value.Url)
                     .AllowAnyHeader()
                     .WithMethods("GET", "POST")
                     .AllowCredentials()
@@ -36,12 +47,7 @@ namespace Sphinx.Infrastructure.WebApi
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<MapHub>("/hub");
-
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapHub<Hubs.SudokuSolverHub>("/hub");
             });
         }
     }
