@@ -9,10 +9,8 @@ namespace Sphinx.Infrastructure.WebApi.Hubs
         private const string ReceiveSudokuMethod = "ReceiveSudoku";
         private readonly SudokuSolver sudokuSolver;
 
-        public SudokuSolverHub(SudokuSolver sudokuSolver)
-        {
+        public SudokuSolverHub(SudokuSolver sudokuSolver) =>
             this.sudokuSolver = sudokuSolver;
-        }
 
         public async Task Solve(int[][] board)
         {
