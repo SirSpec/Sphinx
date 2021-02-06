@@ -8,22 +8,22 @@ namespace Sphinx.Domain.Sudoku
         {
             var grid = new SudokuGrid(squares);
 
-            return Recurrency()
+            return TryToSolveRecurrently()
                 ? grid
-                : throw new Exception();
+                : throw new ArgumentException($"Sudoku cannot be solved.");
 
-            bool Recurrency()
+            bool TryToSolveRecurrently()
             {
                 for (int row = 0; row < SudokuGrid.GridSize; row++)
                     for (int column = 0; column < SudokuGrid.GridSize; column++)
                         if (grid[row, column] == SudokuGrid.EmptySquare)
                         {
-                            for (int number = 1; number <= SudokuGrid.GridSize; number++)
-                                if (grid.CanBePlacedIntoSquare(row, column, number))
+                            for (int digit = 1; digit <= SudokuGrid.GridSize; digit++)
+                                if (grid.CanBePlacedIntoSquare(row, column, digit))
                                 {
-                                    grid[row, column] = number;
+                                    grid[row, column] = digit;
 
-                                    if (Recurrency()) return true;
+                                    if (TryToSolveRecurrently()) return true;
                                     else grid[row, column] = SudokuGrid.EmptySquare;
                                 }
 
