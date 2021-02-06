@@ -7,13 +7,18 @@ namespace Sphinx.Infrastructure.WebApi.Hubs
     public class SudokuSolverHub : Hub
     {
         private const string ReceiveSudokuMethod = "ReceiveSudoku";
+        private readonly SudokuSolver sudokuSolver;
+
+        public SudokuSolverHub(SudokuSolver sudokuSolver)
+        {
+            this.sudokuSolver = sudokuSolver;
+        }
 
         public async Task Solve(int[][] board)
         {
-            var sudokuSolver = new SudokuSolver(board);
-            sudokuSolver.TryToSolve();
+            var grid = sudokuSolver.Solve(board);
 
-            await Clients.Caller.SendAsync(ReceiveSudokuMethod, sudokuSolver.Squares);
+            await Clients.Caller.SendAsync(ReceiveSudokuMethod, grid.Squares);
         }
     }
 }
