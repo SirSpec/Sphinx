@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Sphinx.Domain.Sudoku;
 using Sphinx.Infrastructure.WebApi.Configurations;
 
 namespace Sphinx.Infrastructure.WebApi
@@ -12,15 +13,15 @@ namespace Sphinx.Infrastructure.WebApi
     {
         private readonly IConfiguration configuration;
 
-        public Startup(IConfiguration configuration)
-        {
+        public Startup(IConfiguration configuration) =>
             this.configuration = configuration;
-        }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<SudokuSolverHubOptions>(
                 configuration.GetSection(SudokuSolverHubOptions.SudokuSolverHub));
+
+            services.AddTransient<SudokuSolver>();
 
             services.AddCors();
             services.AddSignalR();
